@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ICOPAD Document Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Work+Sans:wght@300..700&display=swap" rel="stylesheet">
+<style>
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root,[data-theme="light"]{
+  --color-bg:#f7f6f2;--color-surface:#f9f8f5;--color-surface-2:#fbfbf9;
+  --color-surface-offset:#f3f0ec;--color-surface-dynamic:#e6e4df;
+  --color-divider:#dcd9d5;--color-border:#d4d1ca;
+  --color-text:#28251d;--color-text-muted:#7a7974;--color-text-faint:#bab9b4;
+  --color-text-inverse:#f9f8f4;
+  --color-primary:#01696f;--color-primary-hover:#0c4e54;--color-primary-active:#0f3638;
+  --color-primary-highlight:#cedcd8;
+  --color-gold:#d19900;--color-success:#437a22;
+  --shadow-sm:0 1px 2px oklch(0.2 0.01 80/0.06);
+  --shadow-md:0 4px 12px oklch(0.2 0.01 80/0.08);
+  --shadow-lg:0 12px 32px oklch(0.2 0.01 80/0.12);
+  --radius-sm:0.375rem;--radius-md:0.5rem;--radius-lg:0.75rem;--radius-xl:1rem;--radius-full:9999px;
+  --transition-interactive:180ms cubic-bezier(0.16,1,0.3,1);
+  --space-1:.25rem;--space-2:.5rem;--space-3:.75rem;--space-4:1rem;--space-5:1.25rem;
+  --space-6:1.5rem;--space-8:2rem;--space-10:2.5rem;--space-12:3rem;--space-16:4rem;
+  --text-xs:clamp(.75rem,.7rem + .25vw,.875rem);
+  --text-sm:clamp(.875rem,.8rem + .35vw,1rem);
+  --text-base:clamp(1rem,.95rem + .25vw,1.125rem);
+  --text-lg:clamp(1.125rem,1rem + .75vw,1.5rem);
+  --text-xl:clamp(1.5rem,1.2rem + 1.25vw,2.25rem);
+  --text-2xl:clamp(2rem,1.2rem + 2.5vw,3.5rem);
+  --font-display:'Instrument Serif',Georgia,serif;
+  --font-body:'Work Sans','Helvetica Neue',sans-serif;
+  --content-default:960px;--content-wide:1200px;
+}
+[data-theme="dark"]{
+  --color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;
+  --color-surface-offset:#1d1c1a;--color-surface-dynamic:#2d2c2a;
+  --color-divider:#262523;--color-border:#393836;
+  --color-text:#cdccca;--color-text-muted:#797876;--color-text-faint:#5a5957;
+  --color-text-inverse:#2b2a28;
+  --color-primary:#4f98a3;--color-primary-hover:#227f8b;--color-primary-active:#1a626b;
+  --color-primary-highlight:#313b3b;
+  --color-gold:#e8af34;--color-success:#6daa45;
+  --shadow-sm:0 1px 2px oklch(0 0 0/.2);--shadow-md:0 4px 12px oklch(0 0 0/.3);--shadow-lg:0 12px 32px oklch(0 0 0/.4);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme]){
+  --color-bg:#171614;--color-surface:#1c1b19;--color-surface-2:#201f1d;
+  --color-surface-offset:#1d1c1a;--color-surface-dynamic:#2d2c2a;
+  --color-divider:#262523;--color-border:#393836;
+  --color-text:#cdccca;--color-text-muted:#797876;--color-text-faint:#5a5957;
+  --color-primary:#4f98a3;--color-primary-hover:#227f8b;
+}}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:none;text-size-adjust:none;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;scroll-padding-top:var(--space-16)}
+body{min-height:100dvh;line-height:1.6;font-family:var(--font-body);font-size:var(--text-base);color:var(--color-text);background:var(--color-bg)}
+img,picture,svg{display:block;max-width:100%;height:auto}
+input,button,textarea,select{font:inherit;color:inherit}
+h1,h2,h3,h4,h5,h6{text-wrap:balance;line-height:1.15}
+p,li{text-wrap:pretty;max-width:72ch}
+::selection{background:oklch(from var(--color-primary) l c h/.25);color:var(--color-text)}
+:focus-visible{outline:2px solid var(--color-primary);outline-offset:3px;border-radius:var(--radius-sm)}
+a,button,[role="button"]{transition:color var(--transition-interactive),background var(--transition-interactive),border-color var(--transition-interactive),box-shadow var(--transition-interactive)}
+button{cursor:pointer;background:none;border:none}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+
+/* ── Layout ─────────────────────────────────────────────────── */
+.skip-link{position:absolute;top:-40px;left:0;background:var(--color-primary);color:var(--color-text-inverse);padding:var(--space-2) var(--space-4);border-radius:0 0 var(--radius-md) 0;z-index:100;transition:top var(--transition-interactive)}
+.skip-link:focus{top:0}
+header{position:sticky;top:0;z-index:50;background:var(--color-surface);border-bottom:1px solid oklch(from var(--color-text) l c h/.08);backdrop-filter:blur(8px)}
+.header-inner{max-width:var(--content-wide);margin:0 auto;padding:0 var(--space-6);display:flex;align-items:center;gap:var(--space-4);height:60px}
+.logo{display:flex;align-items:center;gap:var(--space-3);text-decoration:none;color:var(--color-text);flex-shrink:0}
+.logo-mark{width:36px;height:36px}
+.logo-text{font-family:var(--font-display);font-size:var(--text-lg);letter-spacing:-.01em}
+nav{display:flex;align-items:center;gap:var(--space-1);margin-left:auto}
+.nav-link{font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted);text-decoration:none;padding:var(--space-2) var(--space-3);border-radius:var(--radius-md);white-space:nowrap}
+.nav-link:hover{color:var(--color-text);background:var(--color-surface-offset)}
+.nav-link.active{color:var(--color-primary);background:var(--color-primary-highlight)}
+.theme-btn{padding:var(--space-2);border-radius:var(--radius-md);color:var(--color-text-muted);margin-left:var(--space-2)}
+.theme-btn:hover{color:var(--color-text);background:var(--color-surface-offset)}
+
+main{min-height:calc(100dvh - 60px)}
+.page{display:none;padding:var(--space-12) var(--space-6);max-width:var(--content-wide);margin:0 auto}
+.page.active{display:block}
+.page-narrow{max-width:var(--content-default)}
+
+/* ── Hero ──────────────────────────────────────────────────── */
+.hero{padding:var(--space-16) 0 var(--space-12);text-align:left}
+.hero-tag{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-xs);font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--color-primary);background:var(--color-primary-highlight);padding:var(--space-1) var(--space-3);border-radius:var(--radius-full);margin-bottom:var(--space-6)}
+.hero-title{font-family:var(--font-display);font-size:var(--text-2xl);color:var(--color-text);margin-bottom:var(--space-4);max-width:16ch}
+.hero-subtitle{font-size:var(--text-lg);color:var(--color-text-muted);max-width:52ch;margin-bottom:var(--space-8)}
+.btn-row{display:flex;flex-wrap:wrap;gap:var(--space-3)}
+.btn{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:600;padding:var(--space-3) var(--space-5);border-radius:var(--radius-md);text-decoration:none;cursor:pointer;border:none;transition:all var(--transition-interactive)}
+.btn-primary{background:var(--color-primary);color:var(--color-text-inverse)}
+.btn-primary:hover{background:var(--color-primary-hover)}
+.btn-secondary{background:var(--color-surface-offset);color:var(--color-text);border:1px solid oklch(from var(--color-text) l c h/.12)}
+.btn-secondary:hover{background:var(--color-surface-dynamic)}
+
+/* ── Cards ─────────────────────────────────────────────────── */
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:var(--space-6);margin-top:var(--space-8)}
+.doc-card{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h/.08);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm);transition:box-shadow var(--transition-interactive),transform var(--transition-interactive);cursor:pointer;text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:var(--space-4)}
+.doc-card:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.doc-card-icon{width:44px;height:44px;background:var(--color-primary-highlight);border-radius:var(--radius-lg);display:flex;align-items:center;justify-content:center;color:var(--color-primary);flex-shrink:0}
+.doc-card-tag{font-size:var(--text-xs);font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--color-text-muted)}
+.doc-card-title{font-family:var(--font-display);font-size:var(--text-lg);line-height:1.3;color:var(--color-text)}
+.doc-card-excerpt{font-size:var(--text-sm);color:var(--color-text-muted);line-height:1.6}
+.doc-card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between}
+.doc-card-date{font-size:var(--text-xs);color:var(--color-text-faint)}
+.pill{display:inline-flex;align-items:center;font-size:var(--text-xs);font-weight:600;padding:var(--space-1) var(--space-2);border-radius:var(--radius-full)}
+.pill-green{background:color-mix(in oklch,var(--color-success) 15%,var(--color-surface));color:var(--color-success)}
+.pill-gold{background:color-mix(in oklch,var(--color-gold) 15%,var(--color-surface));color:var(--color-gold)}
+
+/* ── Document viewer ───────────────────────────────────────── */
+.doc-header{display:flex;align-items:flex-start;gap:var(--space-4);margin-bottom:var(--space-8);padding-bottom:var(--space-6);border-bottom:1px solid var(--color-divider)}
+.back-btn{display:inline-flex;align-items:center;gap:var(--space-2);font-size:var(--text-sm);font-weight:600;color:var(--color-primary);text-decoration:none;cursor:pointer;padding:var(--space-2) 0;margin-bottom:var(--space-6)}
+.back-btn:hover{color:var(--color-primary-hover)}
+.doc-meta{flex:1}
+.doc-title-large{font-family:var(--font-display);font-size:var(--text-xl);margin-bottom:var(--space-2)}
+.doc-body{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h/.08);border-radius:var(--radius-xl);padding:clamp(var(--space-6),4vw,var(--space-12));box-shadow:var(--shadow-sm)}
+.doc-body h2{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-text);margin:var(--space-8) 0 var(--space-4);padding-bottom:var(--space-3);border-bottom:1px solid var(--color-divider)}
+.doc-body h2:first-child{margin-top:0}
+.doc-body p{font-size:var(--text-base);color:var(--color-text);margin-bottom:var(--space-4);max-width:72ch}
+.doc-body ul{list-style:none;margin-bottom:var(--space-4);display:flex;flex-direction:column;gap:var(--space-2)}
+.doc-body ul li{display:flex;gap:var(--space-3);font-size:var(--text-base);color:var(--color-text)}
+.doc-body ul li::before{content:"•";color:var(--color-primary);font-weight:700;flex-shrink:0;margin-top:.15em}
+.doc-body .meeting-block{background:var(--color-surface-offset);border-radius:var(--radius-lg);padding:var(--space-5);margin-bottom:var(--space-4)}
+.doc-body .meeting-block h3{font-size:var(--text-base);font-weight:700;color:var(--color-primary);margin-bottom:var(--space-3)}
+.doc-body strong{font-weight:700}
+
+/* ── Strategic Roles page ──────────────────────────────────── */
+.strategy-hero{padding:var(--space-12) 0 var(--space-8)}
+.strategy-intro{font-size:var(--text-base);color:var(--color-text-muted);max-width:65ch;margin-bottom:var(--space-10)}
+.role-cards{display:flex;flex-direction:column;gap:var(--space-6)}
+.role-card{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h/.08);border-radius:var(--radius-xl);padding:var(--space-8);box-shadow:var(--shadow-sm);display:grid;grid-template-columns:auto 1fr;gap:var(--space-6)}
+@media(max-width:640px){.role-card{grid-template-columns:1fr}}
+.role-number{font-family:var(--font-display);font-size:clamp(3rem,6vw,5rem);color:var(--color-primary);opacity:.2;line-height:1;user-select:none}
+.role-body{}
+.role-tag{font-size:var(--text-xs);font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-3);display:block}
+.role-title{font-family:var(--font-display);font-size:var(--text-xl);color:var(--color-text);margin-bottom:var(--space-4);line-height:1.2}
+.role-desc{font-size:var(--text-base);color:var(--color-text-muted);margin-bottom:var(--space-6);max-width:65ch}
+.role-actions{display:flex;flex-direction:column;gap:var(--space-3)}
+.role-action{display:flex;gap:var(--space-3);align-items:flex-start}
+.role-action-icon{width:28px;height:28px;border-radius:var(--radius-md);background:var(--color-primary-highlight);color:var(--color-primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1em}
+.role-action-text{font-size:var(--text-sm);color:var(--color-text)}
+.role-action-text strong{color:var(--color-text);display:block;margin-bottom:var(--space-1)}
+.strategy-cta{margin-top:var(--space-12);padding:var(--space-8);background:var(--color-primary-highlight);border-radius:var(--radius-xl);border:1px solid color-mix(in oklch,var(--color-primary) 20%,transparent)}
+.strategy-cta h3{font-family:var(--font-display);font-size:var(--text-lg);color:var(--color-primary);margin-bottom:var(--space-3)}
+.strategy-cta p{font-size:var(--text-base);color:var(--color-text-muted);max-width:60ch;margin-bottom:var(--space-5)}
+
+/* ── About ─────────────────────────────────────────────────── */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-6);margin-top:var(--space-8)}
+@media(max-width:640px){.about-grid{grid-template-columns:1fr}}
+.about-card{background:var(--color-surface);border:1px solid oklch(from var(--color-text) l c h/.08);border-radius:var(--radius-xl);padding:var(--space-6);box-shadow:var(--shadow-sm)}
+.about-card h3{font-family:var(--font-display);font-size:var(--text-lg);margin-bottom:var(--space-3);color:var(--color-text)}
+.about-card p{font-size:var(--text-sm);color:var(--color-text-muted)}
+
+/* ── Section headers ───────────────────────────────────────── */
+.section-label{font-size:var(--text-xs);font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-faint);margin-bottom:var(--space-3)}
+.section-title{font-family:var(--font-display);font-size:var(--text-xl);color:var(--color-text);margin-bottom:var(--space-2)}
+.section-sub{font-size:var(--text-base);color:var(--color-text-muted);max-width:60ch;margin-bottom:var(--space-8)}
+
+footer{border-top:1px solid var(--color-divider);padding:var(--space-8) var(--space-6);text-align:center;color:var(--color-text-faint);font-size:var(--text-xs)}
+footer a{color:var(--color-primary);text-decoration:none}
+
+/* Mobile nav */
+.mobile-menu-btn{display:none;padding:var(--space-2);border-radius:var(--radius-md);color:var(--color-text-muted)}
+@media(max-width:768px){
+  .nav-desktop{display:none}
+  .mobile-menu-btn{display:flex;align-items:center;justify-content:center;margin-left:auto}
+  .mobile-nav{display:none;position:fixed;inset:60px 0 0 0;background:var(--color-surface);z-index:40;flex-direction:column;padding:var(--space-6);gap:var(--space-2);overflow-y:auto}
+  .mobile-nav.open{display:flex}
+  .mobile-nav .nav-link{font-size:var(--text-base);padding:var(--space-4) var(--space-4);border-radius:var(--radius-lg)}
+  .hero-title{font-size:var(--text-xl)}
+  .role-card{padding:var(--space-6)}
+}
+</style>
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#home" class="logo" onclick="navigate('home')">
+      <svg class="logo-mark" viewBox="0 0 36 36" fill="none" aria-label="ICOPAD logo">
+        <circle cx="18" cy="18" r="17" stroke="currentColor" stroke-width="1.5" opacity=".2"/>
+        <path d="M10 18 C10 13.58 13.58 10 18 10 C22.42 10 26 13.58 26 18" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round"/>
+        <path d="M10 18 C10 22.42 13.58 26 18 26 C22.42 26 26 22.42 26 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".3"/>
+        <circle cx="18" cy="18" r="3" fill="var(--color-primary)"/>
+        <path d="M14 18 H22" stroke="var(--color-primary)" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <span class="logo-text">ICOPAD</span>
+    </a>
+    <nav class="nav-desktop" role="navigation" aria-label="Main navigation">
+      <a href="#home" class="nav-link active" onclick="navigate('home')">Home</a>
+      <a href="#documents" class="nav-link" onclick="navigate('documents')">Documents</a>
+      <a href="#strategy" class="nav-link" onclick="navigate('strategy')">Strategic Roles</a>
+      <a href="#about" class="nav-link" onclick="navigate('about')">About</a>
+    </nav>
+    <button class="theme-btn" data-theme-toggle aria-label="Toggle dark mode">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    </button>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+    </button>
+  </div>
+</header>
+
+<nav class="mobile-nav" id="mobile-nav" role="navigation" aria-label="Mobile navigation">
+  <a href="#home" class="nav-link" onclick="navigate('home');closeMobileMenu()">Home</a>
+  <a href="#documents" class="nav-link" onclick="navigate('documents');closeMobileMenu()">Documents</a>
+  <a href="#strategy" class="nav-link" onclick="navigate('strategy');closeMobileMenu()">Strategic Roles</a>
+  <a href="#about" class="nav-link" onclick="navigate('about');closeMobileMenu()">About</a>
+</nav>
+
+<main id="main">
+
+<!-- PAGE: HOME -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <span class="hero-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+      Independent Council for People of African Descent
+    </span>
+    <h1 class="hero-title">ICOPAD Document Hub</h1>
+    <p class="hero-subtitle">A central home for ICOPAD programmes, policy documents, and strategic guidance — accessible, organised, and always up to date.</p>
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="navigate('documents')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        Browse Documents
+      </button>
+      <button class="btn btn-secondary" onclick="navigate('strategy')">View Strategic Roles</button>
+    </div>
+  </div>
+  <div style="margin-top:var(--space-12)">
+    <p class="section-label">Latest Documents</p>
+    <p class="section-title">Recent Additions</p>
+    <p class="section-sub">The most recently published ICOPAD documents.</p>
+    <div class="doc-grid">
+      <div class="doc-card" onclick="navigate('doc-education-programme')" role="button" tabindex="0">
+        <div style="display:flex;align-items:center;gap:var(--space-3)">
+          <div class="doc-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+          <span class="doc-card-tag">Education Programme</span>
+        </div>
+        <h3 class="doc-card-title">ICOPAD Education Thematic Programme</h3>
+        <p class="doc-card-excerpt">Consultative discussion on supporting parents of African and African Descent children in navigating and engaging with their children's education.</p>
+        <div class="doc-card-footer"><span class="doc-card-date">June 2026</span><span class="pill pill-green">Active</span></div>
+      </div>
+      <div class="doc-card" onclick="navigate('doc-cover-letter')" role="button" tabindex="0">
+        <div style="display:flex;align-items:center;gap:var(--space-3)">
+          <div class="doc-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <span class="doc-card-tag">Internal Circular</span>
+        </div>
+        <h3 class="doc-card-title">Cover Letter — Education Programme Circulation</h3>
+        <p class="doc-card-excerpt">Invitation to ICOPAD members to review the Education Thematic Programme and share observations ahead of implementation.</p>
+        <div class="doc-card-footer"><span class="doc-card-date">June 2026</span><span class="pill pill-gold">For Review</span></div>
+      </div>
+      <div class="doc-card" onclick="navigate('strategy')" role="button" tabindex="0">
+        <div style="display:flex;align-items:center;gap:var(--space-3)">
+          <div class="doc-card-icon" style="background:color-mix(in oklch,var(--color-gold) 15%,var(--color-surface));color:var(--color-gold)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+          <span class="doc-card-tag">Strategic Guidance</span>
+        </div>
+        <h3 class="doc-card-title">Three Strategic "Head Spear" Roles for Federal Engagement</h3>
+        <p class="doc-card-excerpt">How ICOPAD can claim three distinct leadership roles at the federal level while staying rooted in its education and technology mission.</p>
+        <div class="doc-card-footer"><span class="doc-card-date">June 2026</span><span class="pill pill-gold">Strategy</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE: DOCUMENTS -->
+<div id="page-documents" class="page">
+  <p class="section-label">Document Library</p>
+  <h1 class="section-title">All Documents</h1>
+  <p class="section-sub">Browse and access ICOPAD programme documents, circulars, and guidance materials. Click any document to read in full.</p>
+  <div class="doc-grid">
+    <div class="doc-card" onclick="navigate('doc-education-programme')" role="button" tabindex="0">
+      <div style="display:flex;align-items:center;gap:var(--space-3)">
+        <div class="doc-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <span class="doc-card-tag">Education Programme</span>
+      </div>
+      <h3 class="doc-card-title">ICOPAD Education Thematic Programme</h3>
+      <p class="doc-card-excerpt">Three-meeting consultative series aimed at developing practical tools for parents, educators, and community organisations to strengthen educational outcomes.</p>
+      <div class="doc-card-footer"><span class="doc-card-date">June 2026</span><span class="pill pill-green">Active</span></div>
+    </div>
+    <div class="doc-card" onclick="navigate('doc-cover-letter')" role="button" tabindex="0">
+      <div style="display:flex;align-items:center;gap:var(--space-3)">
+        <div class="doc-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <span class="doc-card-tag">Internal Circular</span>
+      </div>
+      <h3 class="doc-card-title">Cover Letter — Education Programme Circulation</h3>
+      <p class="doc-card-excerpt">Letter from Bwalya Mwali on behalf of ICOPAD, inviting member review and announcing a separate call for volunteers next week.</p>
+      <div class="doc-card-footer"><span class="doc-card-date">June 2026</span><span class="pill pill-gold">For Review</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DOC VIEW: Education Programme -->
+<div id="page-doc-education-programme" class="page page-narrow">
+  <button class="back-btn" onclick="navigate('documents')">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Documents
+  </button>
+  <div class="doc-header">
+    <div class="doc-meta">
+      <span class="doc-card-tag" style="display:inline-block;margin-bottom:var(--space-2)">Education Programme</span>
+      <h1 class="doc-title-large">ICOPAD Education Thematic Programme</h1>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:var(--space-2)">Consultative Discussion on Supporting Parents of African and African Descent Children · June 2026</p>
+    </div>
+    <span class="pill pill-green" style="flex-shrink:0;align-self:flex-start">Active</span>
+  </div>
+  <div class="doc-body">
+    <h2>Background</h2>
+    <p>As we prepare for the implementation of the Second International Decade for People of African Descent (2025–2034), education remains one of the most important areas through which we can contribute to the recognition, development, and empowerment of our communities.</p>
+    <p>During recent ICOPAD discussions, members shared observations and experiences concerning the educational journeys of children of African and African descent families. Among the issues highlighted were observations from Belgium suggesting that children's educational trajectories are often influenced more strongly by the educational attainment of mothers than fathers. Members also shared experiences from South Asian communities, where public schools are frequently perceived to provide education of equal or better quality than private schools, yet migrant families are often encouraged towards more costly private education options.</p>
+    <p>These discussions demonstrated the need for a focused initiative that moves beyond identifying challenges and towards developing practical solutions, guidance, and tools that support parents, educators, and children.</p>
+    <h2>Purpose</h2>
+    <p>The purpose of the programme is to bring together parents, educators, researchers, community leaders, policymakers, and other relevant stakeholders to identify key challenges and co-create practical tools that strengthen educational outcomes and parental engagement.</p>
+    <h2>Objectives</h2>
+    <ul>
+      <li>Identify common challenges faced by parents in understanding and navigating education systems.</li>
+      <li>Examine factors influencing educational outcomes for children of African and African descent.</li>
+      <li>Share experiences, evidence, and good practices from different countries and communities.</li>
+      <li>Develop practical guides, toolkits, and recommendations that parents can use in their everyday engagement with schools and educators.</li>
+      <li>Explore opportunities for collaboration among educators, researchers, community organisations, and policymakers.</li>
+    </ul>
+    <h2>Proposed Process</h2>
+    <div class="meeting-block"><h3>Meeting 1 · Scoping the Issues</h3><ul><li>Sharing experiences and evidence from different countries and communities.</li><li>Identifying priority challenges and opportunities.</li><li>Mapping existing resources, initiatives, and gaps.</li></ul></div>
+    <div class="meeting-block"><h3>Meeting 2 · Expert Consultation and Co-Creation</h3><ul><li>Engagement with invited experts and practitioners.</li><li>Discussion of promising practices and lessons learned.</li><li>Initial development of practical tools, guides, and recommendations.</li></ul></div>
+    <div class="meeting-block"><h3>Meeting 3 · Validation and Finalisation</h3><ul><li>Review and refinement of draft tools and guidance materials.</li><li>Agreement on practical next steps and implementation priorities.</li><li>Identification of opportunities for piloting, dissemination, and partnership development.</li></ul></div>
+    <h2>Expected Outputs</h2>
+    <ul>
+      <li>A <strong>Parent Navigation Guide</strong> for understanding and engaging with education systems.</li>
+      <li>A <strong>Parent–Teacher Engagement Toolkit</strong>.</li>
+      <li>Practical recommendations for strengthening home–school collaboration.</li>
+      <li>A network of experts and practitioners willing to support future implementation and mentoring initiatives.</li>
+    </ul>
+    <h2>Expected Outcomes</h2>
+    <ul>
+      <li>Increased awareness of educational challenges affecting African and African descent families.</li>
+      <li>Improved parent engagement and confidence in navigating educational systems.</li>
+      <li>Stronger collaboration between parents, schools, and communities.</li>
+      <li>Practical and community-informed tools that can be adapted and used across different contexts.</li>
+    </ul>
+    <h2>Conclusion</h2>
+    <p>Education is a critical foundation for the empowerment and advancement of future generations. Through this thematic programme, ICOPAD seeks to facilitate constructive dialogue, shared learning, and the development of practical solutions that support the educational success and well-being of children of African and African descent.</p>
+    <p style="margin-top:var(--space-6);font-style:italic;color:var(--color-text-muted)">ICOPAD · <em>Towards Practical Solutions for Stronger Educational Outcomes</em></p>
+  </div>
+</div>
+
+<!-- DOC VIEW: Cover Letter -->
+<div id="page-doc-cover-letter" class="page page-narrow">
+  <button class="back-btn" onclick="navigate('documents')">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Back to Documents
+  </button>
+  <div class="doc-header">
+    <div class="doc-meta">
+      <span class="doc-card-tag" style="display:inline-block;margin-bottom:var(--space-2)">Internal Circular</span>
+      <h1 class="doc-title-large">Cover Letter — Education Programme Circulation</h1>
+      <p style="font-size:var(--text-sm);color:var(--color-text-muted);margin-top:var(--space-2)">From Bwalya Mwali, for and on behalf of ICOPAD · June 2026</p>
+    </div>
+    <span class="pill pill-gold" style="flex-shrink:0;align-self:flex-start">For Review</span>
+  </div>
+  <div class="doc-body">
+    <p>Dear ICOPAD Members,</p>
+    <p>I hope you are all well.</p>
+    <p>Following our recent discussions and the valuable contributions shared by members, we are pleased to circulate for your review a proposed Education Thematic Programme entitled:</p>
+    <p><strong>"Consultative Discussion on Supporting Parents of African and African Descent Children in Navigating and Engaging with Their Children's Education"</strong></p>
+    <p>The proposal responds to concerns and observations raised by members regarding educational experiences within our communities, including factors influencing children's educational trajectories, parental engagement with schools, and the need for practical tools that can support parents, educators, and children.</p>
+    <p>The programme is envisioned as a series of at least three consultative meetings aimed at bringing together community members, parents, educators, researchers, and other experts to identify challenges, share good practices, and co-create practical guidance and tools.</p>
+    <p>We kindly invite you to review the attached thematic programme and share any comments, suggestions, or observations that may strengthen the proposed process and expected outcomes.</p>
+    <p>A separate call for volunteers and expert recommendations will be circulated next week to support the implementation of this initiative.</p>
+    <p>We look forward to your feedback and continued collaboration as we prepare for the Second International Decade for People of African Descent (2025–2034).</p>
+    <p>With appreciation,</p>
+    <p><strong>Bwalya Mwali</strong><br>For and on behalf of ICOPAD</p>
+  </div>
+</div>
+
+<!-- PAGE: STRATEGIC ROLES -->
+<div id="page-strategy" class="page">
+  <div class="strategy-hero">
+    <span class="hero-tag">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Federal-Level Strategy
+    </span>
+    <h1 class="section-title" style="font-size:var(--text-2xl);max-width:18ch">Three Strategic "Head Spear" Roles</h1>
+    <p class="strategy-intro">These three roles translate ICOPAD's programme summary into distinct, claimable leadership positions at the federal level — each one rooted in ICOPAD's core focus on <strong>education and technology</strong>, while opening a wider doorway into national policy influence.</p>
+  </div>
+  <div class="role-cards">
+    <div class="role-card">
+      <div class="role-number">01</div>
+      <div class="role-body">
+        <span class="role-tag">Head Spear Role #1 · Education Systems Advocate</span>
+        <h2 class="role-title">Federal Voice on Equitable Education for People of African Descent</h2>
+        <p class="role-desc">ICOPAD positions itself as the primary civil-society interlocutor with federal education ministries and agencies on issues affecting African and African Descent families — bringing community evidence directly into national policy conversations.</p>
+        <div class="role-actions">
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Anchor action</strong>Present the Education Thematic Programme outputs (Parent Navigation Guide, Toolkit) to federal education bodies as community-verified policy evidence.</div></div>
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Connection to the Decade</strong>Frame all engagement through the Second International Decade for People of African Descent (2025–2034) — giving federal partners a recognised UN framework to support.</div></div>
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Technology angle</strong>Introduce digital literacy and ed-tech access as a sub-theme, connecting educational equity to the technology pillar.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-number">02</div>
+      <div class="role-body">
+        <span class="role-tag">Head Spear Role #2 · Data & Technology Bridge</span>
+        <h2 class="role-title">Community Data Partner for Federal Monitoring of Racial Equity</h2>
+        <p class="role-desc">ICOPAD claims a role as the trusted community partner that collects, validates, and feeds disaggregated data on African Descent communities into federal statistical and monitoring frameworks — filling a recognised gap in national equity data.</p>
+        <div class="role-actions">
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Anchor action</strong>Propose a formal data-collection protocol to relevant federal statistical bodies — co-designed with ICOPAD member networks — to produce community-level education and welfare indicators.</div></div>
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Technology angle</strong>Position ICOPAD as a digital-first organisation that can deploy tech-enabled data tools (surveys, dashboards, community apps) — making the data partnership practical and scalable.</div></div>
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Connection to the Decade</strong>Use the UN Decade's recognition, justice, and development pillars as the framework justifying disaggregated data collection at federal level.</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="role-card">
+      <div class="role-number">03</div>
+      <div class="role-body">
+        <span class="role-tag">Head Spear Role #3 · Community Capacity Builder</span>
+        <h2 class="role-title">Federal Co-Implementer of the Second International Decade</h2>
+        <p class="role-desc">ICOPAD claims the unique role of being the civil-society body that translates the Second International Decade's federal commitments into on-the-ground community programmes — bridging the gap between government declarations and real community impact.</p>
+        <div class="role-actions">
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Anchor action</strong>Formally request a co-implementation MOU or partnership framework with the relevant federal ministry, explicitly naming the Education Thematic Programme as a pilot delivery mechanism.</div></div>
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Education + Technology</strong>Package ICOPAD's education work and planned technology tools as a ready-made Decade implementation pilot — reducing the federal burden of direct delivery.</div></div>
+          <div class="role-action"><div class="role-action-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div><div class="role-action-text"><strong>Immediate step</strong>Draft a one-page "ICOPAD Decade Partnership Offer" document that any federal interlocutor can read in under three minutes — naming the three roles, the Education Programme, and the technology roadmap as concrete deliverables.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="strategy-cta">
+    <h3>Next Step: The Partnership Offer Document</h3>
+    <p>The most immediate action is drafting a concise one-pager — the "ICOPAD Decade Partnership Offer" — that names these three roles and links them to concrete deliverables already underway (the Education Programme, this document hub, and the planned technology roadmap).</p>
+    <button class="btn btn-primary" onclick="navigate('about')">Learn more about ICOPAD <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+</div>
+
+<!-- PAGE: ABOUT -->
+<div id="page-about" class="page">
+  <p class="section-label">About</p>
+  <h1 class="section-title">About ICOPAD</h1>
+  <p class="section-sub">The Independent Council for People of African Descent works to advance recognition, justice, and development for African and African Descent communities, in alignment with the UN's International Decade for People of African Descent.</p>
+  <div class="about-grid">
+    <div class="about-card"><h3>Our Focus</h3><p>ICOPAD's primary thematic focus is on <strong>education</strong> and <strong>technology</strong> — two areas where structured community engagement can generate lasting impact for families and future generations.</p></div>
+    <div class="about-card"><h3>The Second Decade</h3><p>All ICOPAD programmes are framed within the Second International Decade for People of African Descent (2025–2034), providing a recognised UN framework for community engagement with federal governments.</p></div>
+    <div class="about-card"><h3>This Document Hub</h3><p>This site serves as the central repository for ICOPAD documents, programmes, and strategic guidance. It is hosted on GitHub and can be updated by adding new documents to the repository.</p></div>
+    <div class="about-card"><h3>Updating Documents</h3><p>To add or update a document, edit the <code style="font-family:monospace;font-size:.9em;background:var(--color-surface-offset);padding:2px 6px;border-radius:var(--radius-sm)">index.html</code> file in the GitHub repository. Each document is a separate section of the page, accessible via the navigation.</p></div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  <p>ICOPAD Document Hub · Independent Council for People of African Descent · <a href="https://github.com/janinevanthroo-maker/ICOPAD" target="_blank" rel="noopener noreferrer">View on GitHub</a></p>
+</footer>
+
+<script>
+(function(){
+  const t=document.querySelector('[data-theme-toggle]'),r=document.documentElement;
+  let d=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+  r.setAttribute('data-theme',d);
+  t&&t.addEventListener('click',()=>{
+    d=d==='dark'?'light':'dark';
+    r.setAttribute('data-theme',d);
+    t.setAttribute('aria-label','Switch to '+(d==='dark'?'light':'dark')+' mode');
+    t.innerHTML=d==='dark'
+      ?'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+      :'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  });
+})();
+
+const pages=['home','documents','doc-education-programme','doc-cover-letter','strategy','about'];
+function navigate(id){
+  pages.forEach(p=>{
+    const el=document.getElementById('page-'+p);
+    if(el)el.classList.toggle('active',p===id);
+  });
+  document.querySelectorAll('.nav-link').forEach(l=>{
+    const href=l.getAttribute('href');
+    l.classList.toggle('active',href==='#'+id||(id==='home'&&href==='#home'));
+  });
+  window.location.hash=id;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const mobileBtn=document.getElementById('mobile-menu-btn');
+const mobileNav=document.getElementById('mobile-nav');
+mobileBtn&&mobileBtn.addEventListener('click',()=>{
+  const open=mobileNav.classList.toggle('open');
+  mobileBtn.setAttribute('aria-expanded',open);
+  mobileBtn.innerHTML=open
+    ?'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>'
+    :'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+});
+function closeMobileMenu(){
+  mobileNav.classList.remove('open');
+  mobileBtn.setAttribute('aria-expanded','false');
+  mobileBtn.innerHTML='<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>';
+}
+
+document.querySelectorAll('[role="button"]').forEach(el=>{
+  el.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}});
+});
+
+const hash=window.location.hash.replace('#','');
+if(hash&&pages.includes(hash))navigate(hash);
+else navigate('home');
+</script>
+</body>
+</html>
