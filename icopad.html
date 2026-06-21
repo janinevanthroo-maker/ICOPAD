@@ -186,9 +186,9 @@ a:hover{color:var(--color-primary-hover)}
   </div>
   <nav class="topbar-nav" role="navigation" aria-label="Main navigation">
     <button class="nav-btn active" onclick="showPage('home')" id="nav-home">Dashboard</button>
-    <button class="nav-btn" onclick="showPage('strategy')" id="nav-strategy">Strategy</button>
-    <button class="nav-btn" onclick="showPage('roles')" id="nav-roles">Strategic Roles</button>
-    <button class="nav-btn" onclick="showPage('education')" id="nav-education">Education & Tech</button>
+    <button class="nav-btn" onclick="showPage('strategy')" id="nav-strategy">Stratégie</button>
+    <button class="nav-btn" onclick="showPage('roles')" id="nav-roles">Rôles Stratégiques</button>
+    <button class="nav-btn" onclick="showPage('education')" id="nav-education">Éducation &amp; Tech</button>
     <button class="nav-btn" onclick="showPage('documents')" id="nav-documents">Documents</button>
   </nav>
   <div class="topbar-actions">
@@ -209,31 +209,31 @@ a:hover{color:var(--color-primary-hover)}
       </button>
       <button class="sidebar-item" onclick="showPage('roles')" id="side-roles">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-        Strategic Roles
+        Rôles Stratégiques
       </button>
       <button class="sidebar-item" onclick="showPage('strategy')" id="side-strategy">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        Strategy
+        Stratégie Fédérale
       </button>
       <button class="sidebar-item" onclick="showPage('education')" id="side-education">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-        Education & Tech
+        Éducation &amp; Tech
       </button>
       <button class="sidebar-item" onclick="showPage('documents')" id="side-documents">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        All Documents
+        Tous les Documents
       </button>
     </div>
     <div class="sidebar-divider"></div>
     <div class="sidebar-section">
-      <div class="sidebar-label">Quick Access</div>
+      <div class="sidebar-label">Accès Rapide</div>
       <button class="sidebar-item" onclick="showPage('roles')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-        Head Spear Roles
+        Têtes de Lance
       </button>
       <button class="sidebar-item" onclick="showPage('education')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        Federal Level Focus
+        Niveau Fédéral Belge
       </button>
     </div>
   </aside>
@@ -244,75 +244,75 @@ a:hover{color:var(--color-primary-hover)}
     <!-- ======== HOME / DASHBOARD ======== -->
     <div class="page active" id="page-home">
       <div class="page-header">
-        <h1 class="page-title">ICOPAD Document Hub</h1>
-        <p class="page-subtitle">Centralized repository for strategic documents, policy positions, and federal engagement materials.</p>
+        <h1 class="page-title">ICOPAD — Hub Documentaire</h1>
+        <p class="page-subtitle">Dépôt centralisé de documents stratégiques, positions politiques et matériaux d'engagement auprès du gouvernement fédéral belge.</p>
       </div>
       <div class="stats-row">
         <div class="stat-card">
           <div class="stat-value">4</div>
-          <div class="stat-label">Strategic Documents</div>
+          <div class="stat-label">Documents Stratégiques</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">3</div>
-          <div class="stat-label">Head Spear Roles</div>
+          <div class="stat-label">Rôles Têtes de Lance</div>
         </div>
         <div class="stat-card">
           <div class="stat-value">2</div>
-          <div class="stat-label">Focus Areas</div>
+          <div class="stat-label">Domaines Prioritaires</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" style="color:var(--color-primary)">Active</div>
-          <div class="stat-label">Federal Engagement</div>
+          <div class="stat-value" style="color:var(--color-primary)">Actif</div>
+          <div class="stat-label">Engagement Fédéral</div>
         </div>
       </div>
 
       <div class="search-bar">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--color-text-faint)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <input type="text" placeholder="Search documents…" oninput="filterDocs(this.value)" aria-label="Search documents">
+        <input type="text" placeholder="Rechercher des documents…" oninput="filterDocs(this.value)" aria-label="Rechercher des documents">
       </div>
 
       <div class="doc-grid" id="doc-grid">
-        <div class="doc-card" onclick="showPage('roles')" data-search="strategic roles head spear federal">
+        <div class="doc-card" onclick="showPage('roles')" data-search="rôles stratégiques têtes de lance fédéral belge">
           <div class="doc-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           </div>
-          <div class="doc-card-title">Strategic Roles — Head Spear</div>
-          <div class="doc-card-desc">Three federal-level roles derived from the 44-page strategic summary, connecting education and technology to policy leadership.</div>
+          <div class="doc-card-title">Rôles Stratégiques — Têtes de Lance</div>
+          <div class="doc-card-desc">Trois rôles au niveau fédéral belge issus du résumé stratégique de 44 pages, reliant éducation et technologie à un leadership politique.</div>
           <div class="doc-card-meta">
-            <span class="doc-card-date">Updated Jun 2026</span>
-            <span class="badge badge-teal">Priority</span>
+            <span class="doc-card-date">Mis à jour juin 2026</span>
+            <span class="badge badge-teal">Priorité</span>
           </div>
         </div>
-        <div class="doc-card" onclick="showPage('strategy')" data-search="strategy federal policy positioning">
+        <div class="doc-card" onclick="showPage('strategy')" data-search="stratégie fédérale belge politique positionnement">
           <div class="doc-card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           </div>
-          <div class="doc-card-title">Federal Strategy Overview</div>
-          <div class="doc-card-desc">High-level positioning and strategic objectives for federal-level engagement in education and technology sectors.</div>
+          <div class="doc-card-title">Aperçu Stratégie Fédérale Belge</div>
+          <div class="doc-card-desc">Positionnement et objectifs stratégiques pour l'engagement au niveau du gouvernement fédéral belge dans les secteurs de l'éducation et de la technologie.</div>
           <div class="doc-card-meta">
-            <span class="doc-card-date">Jun 2026</span>
-            <span class="badge badge-amber">Draft</span>
+            <span class="doc-card-date">Juin 2026</span>
+            <span class="badge badge-amber">Brouillon</span>
           </div>
         </div>
-        <div class="doc-card" onclick="showPage('education')" data-search="education technology innovation digital">
+        <div class="doc-card" onclick="showPage('education')" data-search="éducation technologie innovation numérique belge">
           <div class="doc-card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
           </div>
-          <div class="doc-card-title">Education & Technology Focus</div>
-          <div class="doc-card-desc">Core competency documents covering the intersection of education policy and technological innovation at federal level.</div>
+          <div class="doc-card-title">Éducation &amp; Technologie</div>
+          <div class="doc-card-desc">Documents de compétences clés couvrant l'intersection de la politique éducative et de l'innovation technologique au niveau fédéral belge.</div>
           <div class="doc-card-meta">
-            <span class="doc-card-date">Jun 2026</span>
-            <span class="badge badge-green">Active</span>
+            <span class="doc-card-date">Juin 2026</span>
+            <span class="badge badge-green">Actif</span>
           </div>
         </div>
-        <div class="doc-card" onclick="showPage('documents')" data-search="documents archive repository all">
+        <div class="doc-card" onclick="showPage('documents')" data-search="documents archive dépôt tous">
           <div class="doc-card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
-          <div class="doc-card-title">All Documents</div>
-          <div class="doc-card-desc">Full document archive. Add, edit, and manage all strategic materials in one place.</div>
+          <div class="doc-card-title">Tous les Documents</div>
+          <div class="doc-card-desc">Archive complète des documents. Ajoutez, modifiez et gérez tous les matériaux stratégiques en un seul endroit.</div>
           <div class="doc-card-meta">
-            <span class="doc-card-date">Jun 2026</span>
+            <span class="doc-card-date">Juin 2026</span>
             <span class="badge badge-teal">4 docs</span>
           </div>
         </div>
@@ -326,91 +326,94 @@ a:hover{color:var(--color-primary-hover)}
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="#" onclick="showPage('home');return false">Dashboard</a>
             <span>›</span>
-            <span>Strategic Roles</span>
+            <span>Rôles Stratégiques</span>
           </nav>
         </div>
         <button class="btn btn-secondary" onclick="toggleEdit('roles')" id="edit-btn-roles">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          Edit
+          Modifier
         </button>
         <button class="btn btn-primary" onclick="saveEdit('roles')" id="save-btn-roles" style="display:none">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          Save
+          Sauvegarder
         </button>
       </div>
 
       <div class="prose" id="view-roles">
-        <h1>Three "Head Spear" Roles at the Federal Level</h1>
-        <p><em>Translated from the 44-page strategic summary — connecting your core focus on education and technology to federal policy leadership.</em></p>
+        <h1>Trois Rôles « Têtes de Lance » au Niveau Fédéral Belge</h1>
+        <p><em>Traduit du résumé stratégique de 44 pages — reliant votre expertise centrale en éducation et technologie au leadership politique au sein du gouvernement fédéral belge.</em></p>
 
         <div class="highlight-box">
-          <h3>Strategic Intent</h3>
-          <p>These three roles represent the sharpest points of strategic leverage — areas where your background in education and technology most directly intersects with federal-level priorities, creating opportunities to lead rather than advise.</p>
+          <h3>Intention Stratégique</h3>
+          <p>Ces trois rôles représentent les points de levier stratégique les plus nets — les domaines où votre expertise en éducation et en technologie rejoint le plus directement les priorités du gouvernement fédéral belge, créant des opportunités de mener plutôt que de conseiller.</p>
         </div>
 
-        <h2>The Three Roles</h2>
+        <h2>Les Trois Rôles</h2>
 
         <div class="role-card">
           <div class="role-number">1</div>
-          <div class="role-title">Federal Education Technology Architect</div>
-          <div class="role-subtitle">Department of Education / OSTP — Policy & Innovation Lead</div>
-          <p><strong>The claim:</strong> Position yourself as the architect of next-generation federal EdTech infrastructure — the person who bridges the gap between what education technology can do and what federal policy currently allows.</p>
-          <p><strong>Why you own this:</strong> Most federal education officials understand policy but not technology. Most technologists understand systems but not pedagogy or procurement. You sit at the intersection.</p>
+          <div class="role-title">Architecte Fédéral de la Technologie Éducative</div>
+          <div class="role-subtitle">FOD Onderwijs / SPF Éducation — Politique &amp; Innovation Numérique</div>
+          <p><strong>La revendication :</strong> Se positionner comme l'architecte de l'infrastructure EdTech de nouvelle génération au niveau fédéral belge — la personne qui comble le fossé entre ce que la technologie éducative peut faire et ce que la politique fédérale actuelle permet.</p>
+          <p><strong>Pourquoi vous êtes légitime :</strong> La plupart des responsables fédéraux de l'éducation comprennent la politique mais pas la technologie. La plupart des technologues comprennent les systèmes mais pas la pédagogie ni les marchés publics. Vous êtes à l'intersection.</p>
           <ul>
-            <li>Lead the federal definition of "digital equity" in practice, not just in policy documents</li>
-            <li>Shape how AI tools are evaluated, approved, and deployed in K–12 and higher education settings</li>
-            <li>Build the framework for federal EdTech standards that states must meet to receive funding</li>
+            <li>Définir opérationnellement l'« équité numérique » au niveau fédéral belge — pas seulement dans les documents politiques</li>
+            <li>Façonner la manière dont les outils d'IA sont évalués, approuvés et déployés dans les établissements d'enseignement belges</li>
+            <li>Construire le cadre fédéral pour les standards EdTech auxquels les communautés doivent répondre pour accéder aux financements fédéraux</li>
+            <li>Coordonner avec les trois Communautés (Flamande, Française, Germanophone) pour une vision numérique éducative cohérente</li>
           </ul>
-          <p><strong>Entry point:</strong> Office of Educational Technology (OET) advisory role → federal rulemaking input → appointed position.</p>
+          <p><strong>Point d'entrée :</strong> Rôle consultatif auprès du SPF Éducation → contribution à la réglementation fédérale sur le numérique éducatif → position nommée ou de conseiller politique senior.</p>
         </div>
 
         <div class="role-card">
           <div class="role-number">2</div>
-          <div class="role-title">National Digital Workforce Strategy Lead</div>
-          <div class="role-subtitle">Department of Labor / Commerce — Future of Work Initiative</div>
-          <p><strong>The claim:</strong> Own the federal narrative around preparing the American workforce for technological disruption — specifically the 60 million workers whose jobs will be redefined by AI and automation in the next decade.</p>
-          <p><strong>Why you own this:</strong> This role requires simultaneous fluency in labor markets, technology adoption curves, and education pipeline design. It is not a policy role — it is a systems design role that requires exactly your combination of expertise.</p>
+          <div class="role-title">Responsable Fédéral de la Stratégie Compétences Numériques</div>
+          <div class="role-subtitle">SPF Emploi / SPF Économie (FOD Economie) — Initiative Future du Travail</div>
+          <p><strong>La revendication :</strong> Être propriétaire du récit fédéral belge autour de la préparation de la main-d'œuvre à la disruption technologique — en particulier les travailleurs dont les emplois seront redéfinis par l'IA et l'automatisation dans la prochaine décennie.</p>
+          <p><strong>Pourquoi vous êtes légitime :</strong> Ce rôle exige une maîtrise simultanée des marchés du travail, des courbes d'adoption technologique et de la conception des filières éducatives. Ce n'est pas un rôle politique — c'est un rôle de conception de systèmes qui requiert exactement votre combinaison d'expertises.</p>
           <ul>
-            <li>Design the federal retraining architecture: who qualifies, what programs count, how outcomes are measured</li>
-            <li>Set standards for what a "technology-ready" credential means at federal level</li>
-            <li>Build public-private partnerships between community colleges, tech companies, and federal agencies</li>
+            <li>Concevoir l'architecture fédérale de requalification : qui est éligible, quels programmes comptent, comment les résultats sont mesurés</li>
+            <li>Définir ce que signifie une « qualification prête pour la technologie » au niveau fédéral belge</li>
+            <li>Construire des partenariats public-privé entre les centres de formation, les entreprises technologiques et les services publics fédéraux (SPF)</li>
+            <li>S'aligner sur le Plan national de convergence pour l'IA (FPS BOSA) et le Plan national de reprise et de résilience belge</li>
           </ul>
-          <p><strong>Entry point:</strong> Workforce Innovation and Opportunity Act (WIOA) advisory board → Commerce Department technology working group → Senate-confirmed director-level appointment.</p>
+          <p><strong>Point d'entrée :</strong> Groupe de travail du SPF Emploi sur les compétences numériques → Conseil national du Travail (CNT) → Comité parlementaire fédéral sur l'économie numérique.</p>
         </div>
 
         <div class="role-card">
           <div class="role-number">3</div>
-          <div class="role-title">Federal AI Literacy & Ethics Commissioner</div>
-          <div class="role-subtitle">FTC / OSTP / National AI Initiative — Public Trust Lead</div>
-          <p><strong>The claim:</strong> As AI becomes embedded in education, hiring, housing, and healthcare, someone must be the federal voice ensuring the public understands and can critically engage with these systems. This is a new role that does not yet fully exist — you can define it.</p>
-          <p><strong>Why you own this:</strong> AI ethics without education expertise produces compliance theater. Education reform without AI fluency produces outdated curricula. The synthesis is rare and federally underrepresented.</p>
+          <div class="role-title">Commissaire Fédéral à l'Alphabétisation à l'IA &amp; à l'Éthique</div>
+          <div class="role-subtitle">SPF BOSA / Conseil des ministres — Confiance Publique dans le Numérique</div>
+          <p><strong>La revendication :</strong> Alors que l'IA s'intègre dans l'éducation, l'embauche, le logement et les soins de santé, quelqu'un doit être la voix fédérale belge garantissant que le public comprend ces systèmes et peut s'y engager de manière critique. C'est un rôle nouveau qui n'existe pas encore pleinement — vous pouvez le définir.</p>
+          <p><strong>Pourquoi vous êtes légitime :</strong> L'éthique de l'IA sans expertise en éducation produit du théâtre de conformité. La réforme éducative sans maîtrise de l'IA produit des programmes dépassés. La synthèse est rare et sous-représentée au niveau fédéral belge.</p>
           <ul>
-            <li>Define national AI literacy standards for K–12 and adult education</li>
-            <li>Lead federal guidance on algorithmic transparency in public-sector AI systems</li>
-            <li>Serve as the public-facing communicator bridging technical AI policy and civic understanding</li>
+            <li>Définir les standards nationaux belges d'alphabétisation à l'IA pour l'enseignement primaire, secondaire et des adultes</li>
+            <li>Diriger les orientations fédérales sur la transparence algorithmique dans les systèmes d'IA du secteur public (administrations, CPAS, communes)</li>
+            <li>Servir de communicant public faisant le lien entre la politique technique sur l'IA et la compréhension civique</li>
+            <li>Contribuer à la mise en œuvre belge du AI Act européen dans le domaine de l'éducation</li>
           </ul>
-          <p><strong>Entry point:</strong> National AI Initiative Office contributor → FTC technology fellow → appointed Commissioner or Senior Advisor to the President on AI in Education.</p>
+          <p><strong>Point d'entrée :</strong> Contributeur au Plan national de convergence IA (SPF BOSA) → Fellow technologique au sein du gouvernement fédéral → Conseiller senior nommé auprès du Premier Ministre ou du Vice-Premier Ministre compétent pour le numérique.</p>
         </div>
 
-        <h2>Connecting Thread</h2>
-        <p>All three roles share the same underlying logic: <strong>federal systems are making high-stakes technology decisions without sufficient educational perspective, and educational institutions are making high-stakes technology adoptions without sufficient federal coordination.</strong> You are positioned to close both gaps simultaneously.</p>
+        <h2>Fil Directeur</h2>
+        <p>Les trois rôles partagent la même logique sous-jacente : <strong>les institutions fédérales belges prennent des décisions technologiques à enjeux élevés sans perspective éducative suffisante, et les établissements d'enseignement font des adoptions technologiques à enjeux élevés sans coordination fédérale suffisante.</strong> Vous êtes positionné pour combler ces deux lacunes simultanément.</p>
 
         <table>
           <thead>
-            <tr><th>Role</th><th>Primary Agency</th><th>Core Leverage</th><th>Timeline</th></tr>
+            <tr><th>Rôle</th><th>Organisme Principal</th><th>Levier Central</th><th>Horizon</th></tr>
           </thead>
           <tbody>
-            <tr><td>EdTech Architect</td><td>Dept. of Education</td><td>Standards & funding rules</td><td>Near-term (1–2 yrs)</td></tr>
-            <tr><td>Workforce Strategy Lead</td><td>Dept. of Labor/Commerce</td><td>Credential & pipeline design</td><td>Mid-term (2–3 yrs)</td></tr>
-            <tr><td>AI Literacy Commissioner</td><td>FTC / OSTP</td><td>Public trust & ethics framework</td><td>Mid-to-long (3–5 yrs)</td></tr>
+            <tr><td>Architecte EdTech</td><td>SPF Éducation (FOD Onderwijs)</td><td>Standards &amp; règles de financement</td><td>Court terme (1–2 ans)</td></tr>
+            <tr><td>Stratégie Compétences</td><td>SPF Emploi / FOD Economie</td><td>Conception qualification &amp; filière</td><td>Moyen terme (2–3 ans)</td></tr>
+            <tr><td>Commissaire IA &amp; Éthique</td><td>SPF BOSA / Conseil des ministres</td><td>Confiance publique &amp; cadre éthique</td><td>Moyen-long (3–5 ans)</td></tr>
           </tbody>
         </table>
 
-        <h2>How to Update This Document</h2>
-        <p>Click the <strong>Edit</strong> button above to modify any section of this document. Your changes are saved in-session. To persist changes permanently, copy the edited content and update the source file in GitHub.</p>
+        <h2>Comment Mettre à Jour ce Document</h2>
+        <p>Cliquez sur le bouton <strong>Modifier</strong> ci-dessus pour modifier n'importe quelle section de ce document. Vos modifications sont sauvegardées en session. Pour les conserver de manière permanente, copiez le contenu édité et mettez à jour le fichier source dans GitHub.</p>
       </div>
 
-      <textarea class="edit-textarea" id="edit-roles" style="display:none" aria-label="Edit Strategic Roles document"></textarea>
+      <textarea class="edit-textarea" id="edit-roles" style="display:none" aria-label="Modifier le document Rôles Stratégiques"></textarea>
     </div>
 
     <!-- ======== STRATEGY PAGE ======== -->
@@ -420,47 +423,48 @@ a:hover{color:var(--color-primary-hover)}
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="#" onclick="showPage('home');return false">Dashboard</a>
             <span>›</span>
-            <span>Federal Strategy</span>
+            <span>Stratégie Fédérale</span>
           </nav>
         </div>
         <button class="btn btn-secondary" onclick="toggleEdit('strategy')" id="edit-btn-strategy">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          Edit
+          Modifier
         </button>
         <button class="btn btn-primary" onclick="saveEdit('strategy')" id="save-btn-strategy" style="display:none">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          Save
+          Sauvegarder
         </button>
       </div>
       <div class="prose" id="view-strategy">
-        <h1>Federal Strategy Overview</h1>
-        <p>This document outlines the strategic positioning and objectives for federal-level engagement. It serves as the governing framework connecting all other strategic documents in this hub.</p>
+        <h1>Aperçu Stratégie Fédérale Belge</h1>
+        <p>Ce document décrit le positionnement stratégique et les objectifs pour l'engagement au niveau du gouvernement fédéral belge. Il constitue le cadre directeur reliant tous les autres documents stratégiques de ce hub.</p>
 
-        <h2>Strategic Pillars</h2>
-        <h3>1. Establish Credibility Through Specificity</h3>
-        <p>Federal influence is earned through demonstrated expertise in a narrow area, then expanded. The strategy is to become the definitive voice on the education-technology nexus at the federal level before broadening to adjacent policy areas.</p>
+        <h2>Piliers Stratégiques</h2>
+        <h3>1. Établir la Crédibilité par la Spécificité</h3>
+        <p>L'influence au niveau fédéral belge se gagne par une expertise démontrée dans un domaine précis, puis s'élargit. La stratégie consiste à devenir la voix définitive sur le nexus éducation-technologie au niveau fédéral avant de s'étendre à des domaines politiques adjacents.</p>
 
-        <h3>2. Build Institutional Relationships Before Appointments</h3>
-        <p>Advisory roles, working groups, and federal task forces are the primary pathway to appointed positions. The strategy prioritizes relationship-building with agency officials, Senate committee staff, and White House policy offices over public-facing advocacy alone.</p>
+        <h3>2. Construire des Relations Institutionnelles Avant les Nominations</h3>
+        <p>Les rôles consultatifs, les groupes de travail et les groupes d'experts fédéraux sont la voie principale vers les postes nommés. La stratégie privilégie les relations avec les responsables des SPF, le personnel des commissions parlementaires et les cabinets ministériels plutôt que le seul plaidoyer public.</p>
 
-        <h3>3. Create the Category, Then Lead It</h3>
-        <p>The most durable federal roles are ones that did not exist before the person who claimed them defined their scope. The three Head Spear roles in this document set represent areas where no clear federal owner currently exists.</p>
+        <h3>3. Créer la Catégorie, Puis la Diriger</h3>
+        <p>Les rôles fédéraux les plus durables sont ceux qui n'existaient pas avant que la personne qui les a revendiqués en définisse le périmètre. Les trois rôles « têtes de lance » de ce document représentent des domaines où il n'existe actuellement aucun responsable fédéral belge clairement identifié.</p>
 
-        <h2>Key Federal Entry Points</h2>
+        <h2>Points d'Entrée Fédéraux Belges Clés</h2>
         <ul>
-          <li><strong>Office of Educational Technology (OET)</strong> — Department of Education advisory and rulemaking body</li>
-          <li><strong>National AI Initiative Office (NAIIO)</strong> — Cross-agency AI coordination under OSTP</li>
-          <li><strong>Workforce Innovation and Opportunity Act (WIOA)</strong> — Federal workforce development funding and policy</li>
-          <li><strong>Federal Trade Commission (FTC)</strong> — Technology regulation and consumer protection in digital markets</li>
-          <li><strong>Senate HELP Committee</strong> — Health, Education, Labor, and Pensions — primary Senate jurisdiction</li>
+          <li><strong>SPF BOSA (Service Public Fédéral Stratégie et Appui)</strong> — Coordination numérique et IA inter-administrations, Plan national de convergence IA</li>
+          <li><strong>SPF Éducation, Culture et Recherche (FOD Onderwijs)</strong> — Politique fédérale d'enseignement et de formation, financement de la recherche</li>
+          <li><strong>SPF Emploi, Travail et Concertation sociale</strong> — Politique fédérale du marché du travail, compétences numériques, formation professionnelle</li>
+          <li><strong>FOD Economie, KMO, Classes moyennes et Énergie</strong> — Stratégie de compétitivité numérique, politique industrielle tech</li>
+          <li><strong>Parlement fédéral — Commission de l'Économie et de l'Éducation</strong> — Juridiction parlementaire principale sur les politiques numériques et éducatives fédérales</li>
+          <li><strong>Conseil des ministres — Vice-Premier Ministre compétent pour le Numérique</strong> — Coordination politique au plus haut niveau du gouvernement fédéral De Wever</li>
         </ul>
 
-        <h2>Timeline & Milestones</h2>
-        <p>Update this section as objectives are achieved. Use the Edit button above to add progress notes, dates, and new strategic priorities as the federal engagement evolves.</p>
+        <h2>Calendrier et Jalons</h2>
+        <p>Mettez à jour cette section au fur et à mesure de l'atteinte des objectifs. Utilisez le bouton Modifier pour ajouter des notes de progression, des dates et de nouvelles priorités stratégiques à mesure que l'engagement fédéral évolue.</p>
 
-        <blockquote>This is a living document. It should be reviewed and updated quarterly to reflect new federal priorities, agency leadership changes, and strategic opportunities.</blockquote>
+        <blockquote>Ceci est un document vivant. Il doit être revu et mis à jour trimestriellement pour refléter les nouvelles priorités fédérales, les changements de direction des SPF et les opportunités stratégiques émergentes.</blockquote>
       </div>
-      <textarea class="edit-textarea" id="edit-strategy" style="display:none" aria-label="Edit Strategy document"></textarea>
+      <textarea class="edit-textarea" id="edit-strategy" style="display:none" aria-label="Modifier le document Stratégie"></textarea>
     </div>
 
     <!-- ======== EDUCATION & TECH PAGE ======== -->
@@ -470,58 +474,61 @@ a:hover{color:var(--color-primary-hover)}
           <nav class="breadcrumb" aria-label="Breadcrumb">
             <a href="#" onclick="showPage('home');return false">Dashboard</a>
             <span>›</span>
-            <span>Education & Technology</span>
+            <span>Éducation &amp; Technologie</span>
           </nav>
         </div>
         <button class="btn btn-secondary" onclick="toggleEdit('education')" id="edit-btn-education">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          Edit
+          Modifier
         </button>
         <button class="btn btn-primary" onclick="saveEdit('education')" id="save-btn-education" style="display:none">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          Save
+          Sauvegarder
         </button>
       </div>
       <div class="prose" id="view-education">
-        <h1>Education & Technology Focus Areas</h1>
-        <p>Core competency document covering the intersection of education policy and technological innovation. This is the foundational expertise that underpins all three strategic federal roles.</p>
+        <h1>Éducation &amp; Technologie — Domaines d'Action</h1>
+        <p>Document de compétences clés couvrant l'intersection de la politique éducative et de l'innovation technologique en Belgique. C'est l'expertise fondamentale qui sous-tend les trois rôles stratégiques fédéraux.</p>
 
-        <h2>Why This Intersection Matters Federally</h2>
-        <p>The United States is experiencing simultaneous crises in education outcomes and technology workforce readiness. Federal agencies are responding in silos — the Department of Education focuses on pedagogy and access, the Department of Commerce focuses on technology competitiveness, and the Department of Labor focuses on workforce outcomes. None owns the intersection.</p>
+        <h2>Pourquoi Cette Intersection est Stratégique au Niveau Fédéral Belge</h2>
+        <p>La Belgique fait face simultanément à des défis de résultats éducatifs (selon les indicateurs PISA et OCDE) et de préparation à l'économie numérique. Les SPF répondent en silos : le SPF Éducation se concentre sur la pédagogie et l'accès, le FOD Economie se concentre sur la compétitivité technologique, et le SPF Emploi se concentre sur les résultats du marché du travail. Aucun ne détient l'intersection.</p>
 
         <div class="highlight-box">
-          <h3>The Core Insight</h3>
-          <p>Technology is reshaping what education must accomplish. Education is the only lever that can ensure technology serves everyone. Federal policy has not yet caught up to either reality. This gap is the strategic opportunity.</p>
+          <h3>L'Insight Central</h3>
+          <p>La technologie redéfinit ce que l'éducation doit accomplir. L'éducation est le seul levier qui peut garantir que la technologie serve tout le monde. La politique fédérale belge n'a pas encore rattrapé l'une ou l'autre réalité. Ce fossé est l'opportunité stratégique.</p>
         </div>
 
-        <h2>Education Policy Positions</h2>
-        <h3>Digital Equity as Infrastructure</h3>
-        <p>Broadband access, device access, and digital literacy are not supplemental educational resources — they are foundational infrastructure equivalent to electricity and plumbing. Federal funding frameworks must reflect this.</p>
+        <h2>Positions sur la Politique Éducative</h2>
+        <h3>L'Équité Numérique comme Infrastructure</h3>
+        <p>L'accès au haut débit, l'accès aux équipements et la maîtrise du numérique ne sont pas des ressources éducatives supplémentaires — ce sont des infrastructures fondamentales équivalentes à l'électricité et à la plomberie. Les cadres de financement fédéraux belges doivent le refléter, en coordination avec les Communautés et les Régions.</p>
 
-        <h3>AI in the Classroom: A Framework for Decisions</h3>
-        <p>School districts need a federal framework for evaluating, procuring, and deploying AI tools — one that addresses data privacy, algorithmic bias, pedagogical effectiveness, and teacher training simultaneously. No such framework currently exists at federal level.</p>
+        <h3>L'IA dans les Écoles Belges : Un Cadre de Décision</h3>
+        <p>Les établissements scolaires belges ont besoin d'un cadre fédéral pour évaluer, acquérir et déployer les outils d'IA — qui aborde simultanément la protection des données (RGPD), les biais algorithmiques, l'efficacité pédagogique et la formation des enseignants. Un tel cadre cohérent n'existe pas encore au niveau fédéral belge.</p>
 
-        <h3>Credential Reform</h3>
-        <p>The four-year degree as the default signal for workforce readiness is increasingly misaligned with employer needs and learner circumstances. Federal recognition of alternative credentials — micro-credentials, stackable certificates, competency-based assessments — requires a consistent federal quality framework.</p>
+        <h3>Réforme des Certifications et Qualifications</h3>
+        <p>La reconnaissance fédérale des certifications alternatives — micro-certifications, certificats cumulables, évaluations par compétences — nécessite un cadre de qualité fédéral cohérent, en lien avec le Cadre des certifications de la Communauté flamande (Vlaamse Kwalificatiestructuur) et le Cadre francophone des certifications.</p>
 
-        <h2>Technology Policy Positions</h2>
-        <h3>Responsible AI Deployment in Public Systems</h3>
-        <p>When AI systems are used in public education — for grading, discipline, admissions, or instruction — they are de facto public infrastructure and should be subject to transparency, auditability, and equity requirements.</p>
+        <h2>Positions sur la Politique Technologique</h2>
+        <h3>Déploiement Responsable de l'IA dans les Services Publics Belges</h3>
+        <p>Lorsque des systèmes d'IA sont utilisés dans l'enseignement public belge — pour l'évaluation, la discipline, l'admission ou l'instruction — ils constituent de facto une infrastructure publique et devraient être soumis aux exigences de transparence, d'auditabilité et d'équité, conformément au AI Act européen et aux orientations de la Commission européenne.</p>
 
-        <h3>Technology Procurement Reform</h3>
-        <p>Federal and state education technology procurement is broken. Long contracts, vendor lock-in, and inadequate evaluation criteria produce expensive systems that fail students. Reform requires both policy changes and technical standards.</p>
+        <h3>Réforme des Marchés Publics Technologiques</h3>
+        <p>Les marchés publics fédéraux et communautaires pour la technologie éducative souffrent de contrats longs, de dépendance aux fournisseurs et de critères d'évaluation inadéquats. La réforme nécessite à la fois des modifications politiques et des standards techniques coordonnés entre les niveaux de pouvoir belges.</p>
 
-        <h2>Add Your Notes</h2>
-        <p>Use the Edit button to add your own policy positions, research citations, key contacts, or strategic notes to this document.</p>
+        <h3>Alignement sur le Plan National Belge de Convergence IA (SPF BOSA, 2022)</h3>
+        <p>La Belgique a lancé en 2022 son Plan national de convergence pour le développement de l'IA, coordonné par le SPF BOSA. Ce plan définit les priorités fédérales en matière d'IA — les rôles stratégiques ICOPAD doivent s'inscrire et contribuer à ce cadre existant.</p>
+
+        <h2>Ajouter Vos Notes</h2>
+        <p>Utilisez le bouton Modifier pour ajouter vos propres positions politiques, citations de recherche, contacts clés ou notes stratégiques à ce document.</p>
       </div>
-      <textarea class="edit-textarea" id="edit-education" style="display:none" aria-label="Edit Education document"></textarea>
+      <textarea class="edit-textarea" id="edit-education" style="display:none" aria-label="Modifier le document Éducation"></textarea>
     </div>
 
     <!-- ======== ALL DOCUMENTS PAGE ======== -->
     <div class="page" id="page-documents">
       <div class="page-header">
-        <h1 class="page-title">All Documents</h1>
-        <p class="page-subtitle">Full document archive. Click any document to view and edit.</p>
+        <h1 class="page-title">Tous les Documents</h1>
+        <p class="page-subtitle">Archive complète des documents. Cliquez sur un document pour le consulter et le modifier.</p>
       </div>
       <div style="display:flex;flex-direction:column;gap:var(--space-3);max-width:720px">
         <div class="doc-card" onclick="showPage('roles')" style="flex-direction:row;align-items:center;gap:var(--space-4)">
@@ -529,35 +536,35 @@ a:hover{color:var(--color-primary-hover)}
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
           </div>
           <div style="flex:1">
-            <div class="doc-card-title">Strategic Roles — Head Spear</div>
-            <div class="doc-card-desc" style="margin-top:var(--space-1)">Three federal-level roles derived from the 44-page strategic summary.</div>
+            <div class="doc-card-title">Rôles Stratégiques — Têtes de Lance</div>
+            <div class="doc-card-desc" style="margin-top:var(--space-1)">Trois rôles au niveau fédéral belge issus du résumé stratégique de 44 pages.</div>
           </div>
-          <span class="badge badge-teal">Priority</span>
+          <span class="badge badge-teal">Priorité</span>
         </div>
         <div class="doc-card" onclick="showPage('strategy')" style="flex-direction:row;align-items:center;gap:var(--space-4)">
           <div class="doc-card-icon" style="flex-shrink:0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
           </div>
           <div style="flex:1">
-            <div class="doc-card-title">Federal Strategy Overview</div>
-            <div class="doc-card-desc" style="margin-top:var(--space-1)">High-level positioning and strategic objectives for federal-level engagement.</div>
+            <div class="doc-card-title">Aperçu Stratégie Fédérale Belge</div>
+            <div class="doc-card-desc" style="margin-top:var(--space-1)">Positionnement et objectifs stratégiques pour l'engagement au niveau fédéral belge.</div>
           </div>
-          <span class="badge badge-amber">Draft</span>
+          <span class="badge badge-amber">Brouillon</span>
         </div>
         <div class="doc-card" onclick="showPage('education')" style="flex-direction:row;align-items:center;gap:var(--space-4)">
           <div class="doc-card-icon" style="flex-shrink:0">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
           </div>
           <div style="flex:1">
-            <div class="doc-card-title">Education & Technology Focus</div>
-            <div class="doc-card-desc" style="margin-top:var(--space-1)">Core competency documents covering education policy and technology innovation.</div>
+            <div class="doc-card-title">Éducation &amp; Technologie</div>
+            <div class="doc-card-desc" style="margin-top:var(--space-1)">Documents de compétences clés couvrant la politique éducative et l'innovation technologique.</div>
           </div>
-          <span class="badge badge-green">Active</span>
+          <span class="badge badge-green">Actif</span>
         </div>
-        <div style="margin-top:var(--space-4);padding:var(--space-5);background:var(--color-surface);border:2px dashed var(--color-border);border-radius:var(--radius-lg);text-align:center;cursor:pointer" onclick="showToast('To add a new document, edit this file in GitHub and add a new page section.')">
+        <div style="margin-top:var(--space-4);padding:var(--space-5);background:var(--color-surface);border:2px dashed var(--color-border);border-radius:var(--radius-lg);text-align:center;cursor:pointer" onclick="showToast('Pour ajouter un nouveau document, modifiez ce fichier dans GitHub et ajoutez une nouvelle section de page.')">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto var(--space-2);color:var(--color-text-faint)"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-          <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted)">Add New Document</div>
-          <div style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-1)">Edit in GitHub to add a new section</div>
+          <div style="font-size:var(--text-sm);font-weight:500;color:var(--color-text-muted)">Ajouter un Nouveau Document</div>
+          <div style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-1)">Modifier dans GitHub pour ajouter une nouvelle section</div>
         </div>
       </div>
     </div>
@@ -573,7 +580,8 @@ a:hover{color:var(--color-primary-hover)}
 // --- THEME ---
 (function(){
   const r=document.documentElement;
-  const d=localStorage.getItem('icopad-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  let d='light';
+  try{d=localStorage.getItem('icopad-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}
   r.setAttribute('data-theme',d);
 })();
 
@@ -636,7 +644,7 @@ function saveEdit(name){
   edit.style.display='none';
   editBtn.style.display='';
   saveBtn.style.display='none';
-  showToast('Document updated ✓');
+  showToast('Document mis à jour ✓');
 }
 
 // --- SEARCH ---
